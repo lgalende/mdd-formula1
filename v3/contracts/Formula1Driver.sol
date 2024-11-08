@@ -23,7 +23,7 @@ contract Formula1Driver is Ownable, ERC721 {
     }
 
     function mint(uint256 quantity) external {
-        require (isUserWhitelisted(msg.sender));
+        require (isUserWhitelisted(msg.sender), 'user not whitelisted');
         require (balanceOf(msg.sender) + quantity <= NFTS_PER_USER, 'a user cannot have more than 5 NFTs');
 
         // Read totalSupply from storage only once

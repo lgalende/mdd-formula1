@@ -20,7 +20,7 @@ contract Formula1Driver is Ownable, ERC721 {
 
     // the modifier could receive the user as param, if needed
     modifier onlyWhitelisted() {
-        require (whitelist[msg.sender], 'user not allowed');
+        require (whitelist[msg.sender], 'user not whitelisted');
         _; // execute the rest of the calling function
         // we could add some code here too, if needed
     }
@@ -31,7 +31,7 @@ contract Formula1Driver is Ownable, ERC721 {
 
     function mint(uint256 quantity) external onlyWhitelisted() {
         // require (isUserWhitelisted(msg.sender));
-        // we implemented a modifier instead of the above
+        // we implemented the `onlyWhitelisted` modifier instead of the above
 
         require (balanceOf(msg.sender) + quantity <= NFTS_PER_USER, 'a user cannot have more than 5 NFTs');
 

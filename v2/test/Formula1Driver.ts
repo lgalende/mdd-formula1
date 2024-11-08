@@ -36,7 +36,7 @@ describe('Formula1Driver', function () {
     })
   })
 
-  describe.only('mint', () => {
+  describe('mint', () => {
     beforeEach('mint 10 F1 token to the user', async () => {
         await formula1Token.mint(user.address, { value: 1e15 })
     })
