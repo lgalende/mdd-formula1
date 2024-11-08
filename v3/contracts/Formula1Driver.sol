@@ -13,8 +13,8 @@ contract Formula1Driver is Ownable, ERC721 {
     uint256 public constant NFTS_PER_USER = 5;
     uint256 public constant NFT_PRICE = 2 * 10**18; // 2 tokens, must be in token decimals (18 in this case)
 
-    uint256 public totalSupply; // initialized in 0
-    address public f1Token; // reference to the ERC20
+    uint256 public totalSupply; // initialized in 0 (storage)
+    address public immutable f1Token; // reference to the ERC20
 
     address[] public whitelist;
 
@@ -29,9 +29,9 @@ contract Formula1Driver is Ownable, ERC721 {
         // Read totalSupply from storage only once
         uint256 _totalSupply = totalSupply; // copy storage variable in memory => memory is cheaper
 
-        // Read f1Token from storage only once
+        // Read f1Token from storage only once (if we make it immutable, this isn't a problem then)
         // Write f1Token balances only once
-        IERC20(f1Token).transferFrom(msg.sender, address(this), NFT_PRICE * quantity); // TODO: the tokens are locked up
+        IERC20(f1Token).transferFrom(msg.sender, owner(), NFT_PRICE * quantity);
 
         for (uint256 i = 0; i < quantity; i++) {
             _mint(msg.sender, _totalSupply);
