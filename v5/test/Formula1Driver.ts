@@ -47,7 +47,7 @@ describe('Formula1Driver', function () {
         await formula1Driver.connect(owner).whitelistUser(user.address)
       })
 
-        context('when the user has minted less than 5 NF tokens', () => {
+      context('when the user has minted less than 5 NF tokens', () => {
         // TODO: test mint quantity cases
 
         beforeEach('allow contract', async () => {

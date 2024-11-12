@@ -4,9 +4,11 @@ pragma solidity ^0.8.27;
 // Uncomment this line to use console.log
 import "hardhat/console.sol";
 
+import '@openzeppelin/contracts/utils/ReentrancyGuard.sol';
+
 import './Formula1Driver.sol';
 
-contract Formula1Race {
+contract Formula1Race is ReentrancyGuard {
     uint256 public constant PRIZE = 0.001 ether; // 0.001 ETH
 
     address public f1Driver;
@@ -29,18 +31,21 @@ contract Formula1Race {
         console.log('winner: %s', winner);
     }
 
-    function claimPrize() external {        
+    // Security consideration 1: use OZ's ReentrancyGuard to be safe against reentrancy attacks
+    function claimPrize() external nonReentrant {        
+        // Security consideration 2: always follow the Checks-Effects-Interactions pattern
+
+        // Checks
+        // we don't have any here (`require(...)`)
+
+        // Effects
+        address _winner = winner;
+        winner = address(0);
+
+        // Interactions
         // send ETH to the winner
         (bool success, ) = payable(winner).call{value: PRIZE}("");
         require (success, 'send failed');
-        // BUG: reentrancy attack
-        // if `winner` is a contract that on `receive` calls `claimPrice` 5 times, 
-        // then this contract will send the PRIZE to the `winner` 5 times, which is not the expected behavior
-        // Solution:
-        // always follow the Checks-Effects-Interactions pattern
-        // also, consider using OZ's ReentrancyGuard implementation
-        
-        winner = address(0);
     }
 
     // the contract can receive ETH, which will be used to pay the prizes
