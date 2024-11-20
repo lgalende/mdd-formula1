@@ -1,0 +1,10 @@
+{
+  "Formula1Token#Formula1Token": "0x80903327F8EAF2134299C84Ee199d6c782Bf005B",
+  "ProxyModule#Formula1Race": "0x185587cD047B21c56bEe1D841a572154d250a39B",
+  "Formula1Driver#Formula1Driver": "0x59764a2f8CfEef137D72687F3FE34FF41e012A5f",
+  "ProxyModule#TransparentUpgradeableProxy": "0x8a43d73798f0B82CE51f937A5a53c3CfDE592014",
+  "ProxyModule#ProxyAdmin": "0xF855DeFfca7587F40083F579D3aa82cb0604b263",
+  "Formula1Race#Formula1Race": "0x8a43d73798f0B82CE51f937A5a53c3CfDE592014",
+  "Formula1RaceUpgradeV3#Formula1Race": "0x8a43d73798f0B82CE51f937A5a53c3CfDE592014",
+  "UpgradeModule#Formula1RaceV2": "0xa20C7610977BDD947046F663D69e7F5A90c97866"
+}
