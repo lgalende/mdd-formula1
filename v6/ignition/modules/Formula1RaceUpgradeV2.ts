@@ -41,7 +41,7 @@ export const Formula1RaceUpgradeV2 = buildModule('Formula1RaceUpgradeV3', (m) =>
   // Create a local contract instance for the Formula1Race contract.
   // This line tells Hardhat Ignition to use the Formula1Race ABI for the contract at the proxy address.
   // This allows us to call functions on the Formula1Race contract via the proxy.
-  const formula1Race = m.contractAt('Formula1Race', proxy);
+  const formula1Race = m.contractAt('Formula1RaceV2', proxy);
 
   // Return the contract instance so that it can be used by other modules or in tests.
   return { formula1Race, proxy, proxyAdmin };
