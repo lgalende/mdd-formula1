@@ -29,7 +29,9 @@ contract Formula1Race {
         console.log('winner: %s', winner);
     }
 
-    function claimPrize() external {        
+    function claimPrize() external {
+        require (winner != address(0), 'winner not set');
+
         // send ETH to the winner
         (bool success, ) = payable(winner).call{value: PRIZE}("");
         require (success, 'send failed');

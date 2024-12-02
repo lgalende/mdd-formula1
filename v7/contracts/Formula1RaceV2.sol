@@ -42,16 +42,17 @@ contract Formula1RaceV2 is Initializable, ReentrancyGuardUpgradeable {
     function claimPrize() external nonReentrant {
         // Security consideration 2: always follow the Checks-Effects-Interactions pattern
 
+        address _winner = winner;
+
         // Checks
-        // we don't have any here (`require(...)`)
+        require (_winner != address(0), 'winner not set');
 
         // Effects
-        address _winner = winner;
         winner = address(0);
 
         // Interactions
         // send ETH to the winner
-        (bool success, ) = payable(winner).call{value: PRIZE}("");
+        (bool success, ) = payable(_winner).call{value: PRIZE}("");
         require (success, 'send failed');
     }
 
